@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+</head>
+
+<body>
+    <h1>Sign In</h1>
+    <form id="signinForm">
+        <!--<label for="name">First Name:</label>
+        <input type="text" id="namefirst" name="namefirst" required><br><br>-->
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required><br><br>
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password" required><br><br>
+        <button type="submit">Sign In</button>
+    </form>
+
+    <script>
+        document.getElementById('signinForm').addEventListener('submit', async (event) => {
+            event.preventDefault(); // Prevent the default form submission
+
+            //const namefirst = document.getElementById('namefirst').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            try {
+                // Send credentials to the backend
+                const response = await fetch('http://localhost:3000/signin', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password }),
+                });
+
+                if (response.ok) {
+                    const { token } = await response.json(); // Get the token from the response
+                    localStorage.setItem('authToken', token); // Save the token in localStorage
+                    alert('Signed in successfully!');
+                    location.href = '/dashboard'; // Redirect to another page
+                } else {
+                    alert('Invalid name or email. Please try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Error occurred during sign-in.');
+            }
+        });
+    </script>
+
+
+</body>
+
+</html>

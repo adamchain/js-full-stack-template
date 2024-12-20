@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+</head>
+
+<body>
+    <button>Sign Out</button>
+    <hr>
+    <p id="welcomeMessage"></p>
+    <h1>Dashboard</h1>
+</body>
+
+<script>
+
+    (async () => {
+        const token = localStorage.getItem('authToken');
+
+        if (!token) {
+            alert('You must sign in first.');
+            window.location.href = '/signin';
+            return;
+        }
+
+        try {
+            const response = await fetch('http://localhost:3000/validate-token', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                alert(errorData.error || 'Session expired. Please sign in again.');
+                localStorage.removeItem('authToken');
+                window.location.href = '/signin';
+                return;
+            }
+
+            const { user } = await response.json();
+
+            document.getElementById('welcomeMessage').innerText = `Welcome, ${user.namefirst}!`;
+
+        } catch (error) {
+            console.error('Error validating token:', error);
+            alert('An error occurred. Please sign in again.');
+            localStorage.removeItem('authToken');
+            window.location.href = '/signin'; //redirect 
+        }
+    })();
+
+    // Sign out: clear current token from localStorage, create alert, redirect to signin page
+    document.querySelector('button').addEventListener('click', () => {
+        localStorage.removeItem('authToken');
+        alert('You have been signed out.');
+        window.location.href = '/signin';
+    });
+</script>
+
+
+</html>
