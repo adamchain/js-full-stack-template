@@ -2,7 +2,7 @@
 
 ### Summary
 
-Full-stack JS template with PostgreSQL. Lets users sign up, sign in, and hit a protected dashboard. Includes CRUD for user management.
+Full-stack js/node/express template with PostgreSQL. Lets users sign up, sign in, and open a JWT token-protected page. Includes CRUD for user management.
 ![flowchart](https://github.com/user-attachments/assets/a6cc215d-fa86-4504-b28b-a1d18eac5c8f)
 
 1. **Frontend**:  
