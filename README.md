@@ -22,11 +22,14 @@ Full-stack js/node/express template with PostgreSQL. Lets users sign up, sign in
 
 Simple, functional starting point for auth-based apps.
 --
-Guide to setting up node/express-postgres enviornment: https://blog.logrocket.com/crud-rest-api-node-js-express-postgresql/
---
+
 Database Schema:
 
 <img width="768" alt="Screen Shot 2024-12-20 at 2 27 25 AM" src="https://github.com/user-attachments/assets/dd4f8589-c15f-45a8-8f5d-5e16552f968a" />
+
 --
 
+Guide to setting up node/express-postgres enviornment: https://blog.logrocket.com/crud-rest-api-node-js-express-postgresql/
+
+--
 
